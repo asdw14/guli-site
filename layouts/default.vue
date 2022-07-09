@@ -154,6 +154,11 @@ export default {
   },
 
   created() {
+    console.log(this.$route.query.token)
+    this.token = this.$route.query.token
+    if (this.token) {
+      this.wxLogin()
+    }
     this.showInfo()
   },
 
@@ -161,11 +166,11 @@ export default {
     showInfo() {
       //debugger
       var jsonStr = cookie.get("guli_ucenter");
+      console.log(jsonStr)
       // alert(jsonStr)
       if (jsonStr) {
         this.loginInfo.id=123156
         this.loginInfo = JSON.parse(jsonStr);
-        alert(this.loginInfo.nickname)
       }
     },
 
@@ -176,6 +181,18 @@ export default {
 
       //跳转页面
       window.location.href = "/"
+    },
+    wxLogin() {
+      if (this.token == '') return
+      //把token存在cookie中、也可以放在localStorage中
+      cookie.set('guli_token', this.token, {domain: 'localhost'})
+      cookie.set('guli_ucenter', '', {domain: 'localhost'})
+      //登录成功根据token获取用户信息
+      userApi.getLoginInfo().then(response => {
+        this.loginInfo = response.data.data.item
+        //将用户信息记录cookie
+        cookie.set('guli_ucenter', JSON.stringify(response.data.data.item), {domain: 'localhost'})
+      })
     }
   }
 }
