@@ -81,10 +81,19 @@ import teacher from '@/api/teacher'
 export default {
   asyncData({ params, error }) {
     return teacher.getPageList(1, 8).then(response => {
-      // console.log(response.data.data);
+      console.log(response.data.data);
       return { data: response.data.data }
     });
   },
+  methods:{
+    gotoPage(page){
+      if(page<=this.data.pages){
+            teacher.getPageList(page, 8).then(response => {
+            this.data = response.data.data
+        })
+      }
+    }
+  }
 };
 
 </script>
