@@ -246,9 +246,11 @@ export default {
     //分页查询
     gotoPage(page) {
       this.page = page
-      course.getPageList(page, 8, this.searchObj).then(response => {
-        this.data = response.data.data
-      })
+      if(page <= this.data.pages){
+          course.getPageList(page, 8, this.searchObj).then(response => {
+            this.data = response.data.data
+          })
+      }
     }
   }
 }

@@ -23,11 +23,11 @@
         </tr>
         <tr class="good">
           <td class="name First">
-            <a target="_blank" :href="'https://localhost:3000/course/'+order.courseId">
+            <a target="_blank" :href="'http://localhost:3000/course/'+order.courseId">
               <img :src="order.courseCover"></a>
             <div class="goodInfo">
               <input type="hidden" class="ids ids_14502" value="14502">
-              <a target="_blank" :href="'https://localhost:3000/course/'+ order.courseId">{{order.courseTitle}}</a>
+              <a target="_blank" :href="'http://localhost:3000/course/'+ order.courseId">{{order.courseTitle}}</a>
             </div>
           </td>
           <td class="price">
